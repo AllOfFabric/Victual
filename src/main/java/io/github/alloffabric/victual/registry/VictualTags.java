@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
 
 public class VictualTags {
-	// Register Here
+	// Register here
 	
 	private VictualTags() {
 		// NO-OP

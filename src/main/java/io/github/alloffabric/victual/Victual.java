@@ -1,9 +1,6 @@
 package io.github.alloffabric.victual;
 
-import io.github.alloffabric.victual.registry.VictualBlockEntities;
-import io.github.alloffabric.victual.registry.VictualBlocks;
-import io.github.alloffabric.victual.registry.VictualItems;
-import io.github.alloffabric.victual.registry.VictualTags;
+import io.github.alloffabric.victual.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -29,5 +26,6 @@ public class Victual implements ModInitializer {
 		VictualItems.init();
 		VictualBlockEntities.init();
 		VictualTags.init();
+		VictualEvents.init();
 	}
 }

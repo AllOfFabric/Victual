@@ -1,7 +1,10 @@
 package io.github.alloffabric.victual.registry;
 
 import io.github.alloffabric.victual.Victual;
+import io.github.alloffabric.victual.block.CuttingBoardBlock;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
@@ -9,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.function.Function;
 
 public class VictualBlocks {
-	// Register Here
+	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
 	
 	private VictualBlocks() {
 		// NO-OP
