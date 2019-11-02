@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "victual",
+	"version": "${version}",
+	"name": "Victual",
+	"description": "A food mod designed around improving hunger and in-world food crafting.",
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/AllOfFabric/Victual"
+	},
+	"license": "MIT",
+	"icon": "assets/victual/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.alloffabric.victual.Victual"
+		],
+		"client": [
+			"io.github.alloffabric.victual.VictualClient"
+		]
+	},
+	"mixins": [
+		"victual.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.4.0",
+		"fabric": "*"
+	}
+}
