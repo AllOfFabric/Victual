@@ -4,6 +4,7 @@ import io.github.alloffabric.victual.Victual;
 import io.github.alloffabric.victual.block.CounterBlock;
 import io.github.alloffabric.victual.block.CuttingBoardBlock;
 import io.github.alloffabric.victual.block.OvenBlock;
+import io.github.alloffabric.victual.block.PanBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -14,11 +15,10 @@ import net.minecraft.util.registry.Registry;
 import java.util.function.Function;
 
 public class VictualBlocks {
-	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
-
-	public static final OvenBlock OVEN = register("oven", new OvenBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
-
 	public static final CounterBlock COUNTER = register("counter", new CounterBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
+	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
+	public static final OvenBlock OVEN = register("oven", new OvenBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
+	public static final PanBlock PAN = register("pan", new PanBlock(FabricBlockSettings.copy(Blocks.ANVIL).build()));
 	
 	private VictualBlocks() {
 		// NO-OP
