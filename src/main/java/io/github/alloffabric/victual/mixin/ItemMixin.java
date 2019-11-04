@@ -41,7 +41,7 @@ public class ItemMixin {
 		Identifier identifier = Registry.ITEM.getId(item);
 
 		if (recipes.containsKey(identifier)) {
-			callbackInfo.setReturnValue(true);
+			callbackInfo.setReturnValue(recipes.get(identifier) != null);
 		}
 	}
 }
