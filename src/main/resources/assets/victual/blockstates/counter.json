@@ -1,0 +1,64 @@
+{
+  "multipart": [
+	{   "when": { "facing": "north", "connection": "none" },
+		"apply": { "model": "victual:block/counter" }
+	},
+	{   "when": { "facing": "east", "connection": "none" },
+		"apply": { "model": "victual:block/counter", "y": 90, "uvlock": true }
+	},
+	{   "when": { "facing": "south", "connection": "none" },
+		"apply": { "model": "victual:block/counter", "y": 180, "uvlock": true }
+	},
+	{   "when": { "facing": "west", "connection": "none" },
+		"apply": { "model": "victual:block/counter", "y": 270, "uvlock": true }
+	},
+	{   "when": { "facing": "north", "connection": "inside_left" },
+		"apply": { "model": "victual:block/counter_inside", "y": 270, "uvlock": true }
+	},
+	{   "when": { "facing": "east", "connection": "inside_left" },
+		"apply": { "model": "victual:block/counter_inside" }
+	},
+	{   "when": { "facing": "south", "connection": "inside_left" },
+		"apply": { "model": "victual:block/counter_inside", "y": 90, "uvlock": true }
+	},
+	{   "when": { "facing": "west", "connection": "inside_left" },
+		"apply": { "model": "victual:block/counter_inside", "y": 180, "uvlock": true }
+	},
+	{   "when": { "facing": "north", "connection": "inside_right" },
+		"apply": { "model": "victual:block/counter_inside" }
+	},
+	{   "when": { "facing": "east", "connection": "inside_right" },
+		"apply": { "model": "victual:block/counter_inside", "y": 90, "uvlock": true }
+	},
+	{   "when": { "facing": "south", "connection": "inside_right" },
+		"apply": { "model": "victual:block/counter_inside", "y": 180, "uvlock": true }
+	},
+	{   "when": { "facing": "west", "connection": "inside_right" },
+		"apply": { "model": "victual:block/counter_inside", "y": 270, "uvlock": true }
+	},
+	{   "when": { "facing": "north", "connection": "outside_left" },
+		"apply": { "model": "victual:block/counter_outside" }
+	},
+	{   "when": { "facing": "east", "connection": "outside_left" },
+		"apply": { "model": "victual:block/counter_outside", "y": 90, "uvlock": true }
+	},
+	{   "when": { "facing": "south", "connection": "outside_left" },
+		"apply": { "model": "victual:block/counter_outside", "y": 180, "uvlock": true }
+	},
+	{   "when": { "facing": "west", "connection": "outside_left" },
+		"apply": { "model": "victual:block/counter_outside", "y": 270, "uvlock": true }
+	},
+	{   "when": { "facing": "north", "connection": "outside_right" },
+		"apply": { "model": "victual:block/counter_outside", "y": 90, "uvlock": true }
+	},
+	{   "when": { "facing": "east", "connection": "outside_right" },
+		"apply": { "model": "victual:block/counter_outside", "y": 180, "uvlock": true }
+	},
+	{   "when": { "facing": "south", "connection": "outside_right" },
+		"apply": { "model": "victual:block/counter_outside", "y": 270, "uvlock": true }
+	},
+	{   "when": { "facing": "west", "connection": "outside_right" },
+		"apply": { "model": "victual:block/counter_outside" }
+	}
+  ]
+}
