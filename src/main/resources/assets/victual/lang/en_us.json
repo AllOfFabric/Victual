@@ -1,3 +1,6 @@
 {
-	"itemGroup.victual.group": "Victual"
+	"itemGroup.victual.group": "Victual",
+	"block.victual.cutting_board": "Cutting Board",
+	"block.victual.oven": "Oven",
+	"item.victual.knife": "Cutting Knife"
 }
