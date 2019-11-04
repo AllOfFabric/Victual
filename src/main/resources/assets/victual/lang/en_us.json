@@ -2,5 +2,7 @@
 	"itemGroup.victual.group": "Victual",
 	"block.victual.cutting_board": "Cutting Board",
 	"block.victual.oven": "Oven",
-	"item.victual.knife": "Cutting Knife"
+	"item.victual.bread_slice": "Bread Slice",
+	"item.victual.knife": "Cutting Knife",
+	"item.victual.toast": "Toast"
 }

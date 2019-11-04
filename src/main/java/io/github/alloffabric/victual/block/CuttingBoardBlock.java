@@ -1,6 +1,7 @@
 package io.github.alloffabric.victual.block;
 
 import io.github.alloffabric.victual.block.entity.CuttingBoardBlockEntity;
+import io.github.alloffabric.victual.registry.VictualItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -8,7 +9,10 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Hand;
@@ -34,7 +38,7 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 	}
 
 	static {
-		recipes.put(Items.POPPY, new ItemStack(Items.RED_DYE, 2));
+		recipes.put(Items.BREAD, new ItemStack(VictualItems.BREAD_SLICE, 3));
 	}
 
 	@Override
