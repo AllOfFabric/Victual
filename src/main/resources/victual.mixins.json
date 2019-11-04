@@ -3,7 +3,7 @@
 	"package": "io.github.alloffabric.victual.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		
+		"ItemMixin"
 	],
 	"client": [
 		
