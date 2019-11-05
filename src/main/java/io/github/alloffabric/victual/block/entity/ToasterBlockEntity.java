@@ -1,5 +1,6 @@
 package io.github.alloffabric.victual.block.entity;
 
+import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlockEntities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -13,6 +14,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
+
+import java.util.Optional;
 
 public class ToasterBlockEntity extends BlockEntity implements BlockEntityClientSerializable, Tickable {
 	public DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
@@ -43,12 +46,15 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			stackOne.setInvStack(0, stacks.get(0));
 			stackTwo.setInvStack(0, stacks.get(1));
 
-			if (!isEmpty(0) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).isPresent()) {
-				results.set(0, world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).orElse(null).craft());
+			Optional<CuttingBoardRecipe> recipeOne = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, stackOne, world);
+			Optional<CuttingBoardRecipe> recipeTwo = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, stackTwo, world);
+
+			if (!isEmpty(0) && recipeOne.isPresent()) {
+				results.set(0, recipeOne.orElse(null).craft(stackOne));
 			}
 
-			if (!isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).isPresent()) {
-				results.set(1, world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).orElse(null).craft());
+			if (!isEmpty(1) && recipeTwo.isPresent()) {
+				results.set(1, recipeTwo.orElse(null).craft(stackTwo));
 			}
 
 			stacks.clear();

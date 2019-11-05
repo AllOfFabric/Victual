@@ -1,7 +1,7 @@
 package io.github.alloffabric.victual.block;
 
 import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
-import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
+import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -26,6 +26,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 	public ToasterBlock(Settings settings) {
@@ -47,7 +48,9 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 				BasicInventory inventory = new BasicInventory(1);
 				inventory.setInvStack(0, stack);
 
-				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, inventory, world).isPresent()) {
+				Optional<CuttingBoardRecipe> recipe = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world);
+
+				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && recipe.isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 0);
 					stack.decrement(1);
 					return true;
@@ -55,7 +58,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(0));
 					toasterBlockEntity.removeStack(0);
 					return true;
-				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, inventory, world).isPresent()) {
+				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && recipe.isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 1);
 					stack.decrement(1);
 					return true;

@@ -25,6 +25,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 	public CuttingBoardBlock(Block.Settings settings) {
@@ -51,7 +52,9 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 			BasicInventory inventory = new BasicInventory(1);
 			inventory.setInvStack(0, stack);
 
-			if (blockEntity.isEmpty() && !stack.isEmpty() && world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).isPresent()) {
+			Optional<CuttingBoardRecipe> recipe = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world);
+
+			if (blockEntity.isEmpty() && !stack.isEmpty() && recipe.isPresent()) {
 				blockEntity.setStack(stack);
 				playerEntity.setStackInHand(hand, ItemStack.EMPTY);
 				return true;

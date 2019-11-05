@@ -39,10 +39,6 @@ public class CuttingBoardRecipe implements Recipe<BasicInventory> {
 		return ItemStack.EMPTY;
 	}
 
-	public ItemStack craft() {
-		return getOutput().copy();
-	}
-
 	@Override
 	public boolean fits(int var1, int var2) {
 		return false;

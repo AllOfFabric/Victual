@@ -21,6 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
+import java.util.Optional;
+
 public class CuttingBoardBlockEntity extends BlockEntity implements BlockEntityClientSerializable, HittableBlock {
 	public ItemStack stack = ItemStack.EMPTY;
 
@@ -38,8 +40,10 @@ public class CuttingBoardBlockEntity extends BlockEntity implements BlockEntityC
 			BasicInventory inventory = new BasicInventory(1);
 			inventory.setInvStack(0, stack);
 
-			if (!world.isClient() && !stack.isEmpty() && world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).isPresent()) {
-				player.inventory.offerOrDrop(world, world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).orElse(null).getOutput().copy());
+			Optional<CuttingBoardRecipe> recipe = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world);
+
+			if (!world.isClient() && !stack.isEmpty() && recipe.isPresent()) {
+				player.inventory.offerOrDrop(world, recipe.orElse(null).getOutput().copy());
 				decrStack();
 				world.playSound(null, getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return ActionResult.SUCCESS;
