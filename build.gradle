@@ -60,10 +60,15 @@ dependencies {
 		transitive = false
 	}
 	
+	modApi "io.github.cottonmc:LibCD:1.5.1+1.14.4"
+	modApi "io.github.cottonmc:StaticData:1.1.2"
+	
 	modImplementation "com.github.indi-code:TinyConfig:${project.tiny_config_version}"//"io.github.indicode.fabric:tinyconfig:${project.tiny_config_version}"
 	include "com.github.indi-code:TinyConfig:${project.tiny_config_version}"//"io.github.indicode.fabric:tinyconfig:${project.tiny_config_version}"
 	
 	modImplementation ("me.shedaniel:RoughlyEnoughItems:${project.rei_version}") { exclude(module: "ModMenu") }
+	
+	include "io.github.cottonmc:StaticData:1.1.2"
 }
 
 processResources {

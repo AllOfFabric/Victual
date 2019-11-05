@@ -1,7 +1,7 @@
 package io.github.alloffabric.victual.block;
 
 import io.github.alloffabric.victual.block.entity.CuttingBoardBlockEntity;
-import io.github.alloffabric.victual.registry.VictualItems;
+import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -9,10 +9,9 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.BasicInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Hand;
@@ -26,19 +25,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEntityProvider {
-	public static HashMap<Item, ItemStack> recipes = new HashMap<>();
-
 	public CuttingBoardBlock(Block.Settings settings) {
 		super(settings);
 
 		setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
-	}
-
-	static {
-		recipes.put(Items.BREAD, new ItemStack(VictualItems.BREAD_SLICE, 3));
 	}
 
 	@Override
@@ -56,8 +48,10 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 		if (world.getBlockEntity(blockPos) instanceof CuttingBoardBlockEntity) {
 			ItemStack stack = playerEntity.getStackInHand(hand);
 			CuttingBoardBlockEntity blockEntity = (CuttingBoardBlockEntity) world.getBlockEntity(blockPos);
+			BasicInventory inventory = new BasicInventory(1);
+			inventory.setInvStack(0, stack);
 
-			if (blockEntity.isEmpty() && !stack.isEmpty() && recipes.containsKey(stack.getItem())) {
+			if (blockEntity.isEmpty() && !stack.isEmpty() && world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).isPresent()) {
 				blockEntity.setStack(stack);
 				playerEntity.setStackInHand(hand, ItemStack.EMPTY);
 				return true;

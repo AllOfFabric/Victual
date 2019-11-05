@@ -1,8 +1,11 @@
 package io.github.alloffabric.victual;
 
+import io.github.alloffabric.victual.compat.libcd.CuttingBoardTweaker;
+import io.github.alloffabric.victual.compat.libcd.ToasterTweaker;
 import io.github.alloffabric.victual.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -27,5 +30,11 @@ public class Victual implements ModInitializer {
 		VictualBlockEntities.init();
 		VictualTags.init();
 		VictualEvents.init();
+		VictualRecipes.init();
+
+		if (FabricLoader.getInstance().isModLoaded("libcd")) {
+			CuttingBoardTweaker.init();
+			ToasterTweaker.init();
+		}
 	}
 }

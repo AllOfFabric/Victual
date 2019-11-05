@@ -1,0 +1,11 @@
+{
+   "type": "victual:toaster_recipe",
+   "input": {
+     "item": "victual:bread_slice"
+   },
+   "result": {
+     "item": "victual:toast",
+     "count": 1
+   },
+   "cookTime": 200
+}

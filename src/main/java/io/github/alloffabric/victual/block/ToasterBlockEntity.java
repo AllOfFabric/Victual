@@ -1,34 +1,25 @@
 package io.github.alloffabric.victual.block;
 
 import io.github.alloffabric.victual.Victual;
+import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlockEntities;
-import io.github.alloffabric.victual.registry.VictualItems;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.inventory.BasicInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.Pair;
 import net.minecraft.util.Tickable;
-
-import java.util.HashMap;
 
 public class ToasterBlockEntity extends BlockEntity implements BlockEntityClientSerializable, Tickable {
 	public DefaultedList<ItemStack> stacks = DefaultedList.ofSize(2, ItemStack.EMPTY);
 	public int timeLeft = 0;
 	public int prevTimeLeft = 0;
 	public int recipeTime = 0;
-
-	public static HashMap<Item, Pair<ItemStack, Integer>> recipes = new HashMap<>();
-
-	static{
-		recipes.put(VictualItems.BREAD_SLICE, new Pair<>(new ItemStack(VictualItems.TOAST), 200));
-	}
 
 	public ToasterBlockEntity() {
 		this(VictualBlockEntities.TOASTER);
@@ -40,8 +31,6 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 
 	@Override
 	public void tick() {
-		//recipes.put(Items.BREAD, new Pair<>(new ItemStack(VictualItems.BREAD_SLICE), 200));
-
 		if (timeLeft > 0) {
 			Victual.LOGGER.info(timeLeft);
 			prevTimeLeft = timeLeft;
@@ -51,13 +40,17 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			timeLeft = 0;
 
 			DefaultedList<ItemStack> results = DefaultedList.ofSize(2, ItemStack.EMPTY);
+			BasicInventory stackOne = new BasicInventory(1);
+			BasicInventory stackTwo = new BasicInventory(1);
+			stackOne.setInvStack(0, stacks.get(0));
+			stackTwo.setInvStack(0, stacks.get(1));
 
-			if (!isEmpty(0) && recipes.containsKey(getStack(0).getItem())) {
-				results.set(0, recipes.get(getStack(0).getItem()).getLeft().copy());
+			if (!isEmpty(0) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).isPresent()) {
+				results.set(0, world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).orElse(null).craft());
 			}
 
-			if (!isEmpty(1) && recipes.containsKey(getStack(1).getItem())) {
-				results.set(1, recipes.get(getStack(1).getItem()).getLeft().copy());
+			if (!isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).isPresent()) {
+				results.set(1, world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).orElse(null).craft());
 			}
 
 			Victual.LOGGER.info("Done cooking. Items should have appeared.");
@@ -72,9 +65,14 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 	}
 
 	public void activateToaster() {
-		if (!isEmpty(0) && recipes.containsKey(getStack(0).getItem()) || !isEmpty(1) && recipes.containsKey(getStack(1).getItem())) {
-			int stackOneTime = !isEmpty(0) ? recipes.get(getStack(0).getItem()).getRight() : 0;
-			int stackTwoTime = !isEmpty(1) ? recipes.get(getStack(1).getItem()).getRight() : 0;
+		BasicInventory stackOne = new BasicInventory(1);
+		BasicInventory stackTwo = new BasicInventory(1);
+		stackOne.setInvStack(0, stacks.get(0));
+		stackTwo.setInvStack(0, stacks.get(1));
+
+		if (!isEmpty(0) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).isPresent() || !isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).isPresent()) {
+			int stackOneTime = !isEmpty(0) ? world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).orElse(null).getCookTime() : 0;
+			int stackTwoTime = !isEmpty(1) ? world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).orElse(null).getCookTime() : 0;
 			int totalTime = stackOneTime + stackTwoTime;
 
 			if (totalTime > 0) {

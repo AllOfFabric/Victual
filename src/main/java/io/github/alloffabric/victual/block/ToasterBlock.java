@@ -1,5 +1,6 @@
 package io.github.alloffabric.victual.block;
 
+import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -7,6 +8,7 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.BasicInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -41,8 +43,10 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 
 			if (!playerEntity.isSneaking() && toasterBlockEntity.timeLeft <= 0) {
 				ItemStack stack = playerEntity.getStackInHand(hand);
+				BasicInventory inventory = new BasicInventory(1);
+				inventory.setInvStack(0, stack);
 
-				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && ToasterBlockEntity.recipes.containsKey(stack.getItem())) {
+				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, inventory, world).isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 0);
 					stack.decrement(1);
 					return true;
@@ -50,7 +54,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(0));
 					toasterBlockEntity.removeStack(0);
 					return true;
-				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && ToasterBlockEntity.recipes.containsKey(stack.getItem())) {
+				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, inventory, world).isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 1);
 					stack.decrement(1);
 					return true;

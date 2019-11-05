@@ -17,6 +17,9 @@
 		],
 		"client": [
 			"io.github.alloffabric.victual.VictualClient"
+		],
+		"rei_plugins_v0": [
+			"io.github.alloffabric.victual.compat.rei.VictualREIPlugin"
 		]
 	},
 	"mixins": [

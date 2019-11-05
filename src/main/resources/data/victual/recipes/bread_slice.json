@@ -1,0 +1,10 @@
+{
+   "type": "victual:cutting_board_recipe",
+   "input": {
+     "item": "minecraft:bread"
+   },
+   "result": {
+     "item": "victual:bread_slice",
+     "count": 3
+   }
+}

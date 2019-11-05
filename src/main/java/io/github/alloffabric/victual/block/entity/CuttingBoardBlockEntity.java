@@ -1,14 +1,15 @@
 package io.github.alloffabric.victual.block.entity;
 
 import io.github.alloffabric.victual.api.HittableBlock;
-import io.github.alloffabric.victual.block.CuttingBoardBlock;
 import io.github.alloffabric.victual.item.KnifeItem;
+import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import io.github.alloffabric.victual.registry.VictualBlockEntities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.BasicInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
@@ -34,8 +35,11 @@ public class CuttingBoardBlockEntity extends BlockEntity implements BlockEntityC
 	@Override
 	public ActionResult onHit(PlayerEntity player, World world, Hand hand, ItemStack heldStack, BlockPos pos, BlockState state, Direction direction) {
 		if (!heldStack.isEmpty() && heldStack.getItem() instanceof KnifeItem) {
-			if (!world.isClient() && !stack.isEmpty() && CuttingBoardBlock.recipes.containsKey(stack.getItem())) {
-				player.inventory.offerOrDrop(world, CuttingBoardBlock.recipes.get(stack.getItem()).copy());
+			BasicInventory inventory = new BasicInventory(1);
+			inventory.setInvStack(0, stack);
+
+			if (!world.isClient() && !stack.isEmpty() && world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).isPresent()) {
+				player.inventory.offerOrDrop(world, world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world).orElse(null).getOutput().copy());
 				decrStack();
 				world.playSound(null, getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return ActionResult.SUCCESS;
