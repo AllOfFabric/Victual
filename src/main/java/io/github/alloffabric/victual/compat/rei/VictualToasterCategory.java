@@ -17,6 +17,8 @@ import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Identifier;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,10 +60,14 @@ public class VictualToasterCategory implements RecipeCategory<VictualToasterDisp
 			}
 		}));
 
+		float cookTime = 1.0F * recipeDisplaySupplier.get().getCookTime() / 20;
+		DecimalFormat format = new DecimalFormat("#.#");
+		format.setRoundingMode(RoundingMode.CEILING);
+
 		widgets.add(EntryWidget.create(startPoint.x + 4, startPoint.y + 5).entries(recipeDisplaySupplier.get().getInputEntries().get(0)).noBackground());
 		widgets.add(EntryWidget.create(startPoint.x + 61, startPoint.y + 5).entries(recipeDisplaySupplier.get().getOutputEntries()).noBackground());
 
-        widgets.add(new LabelWidget(startPoint.x + 41, startPoint.y + 28,  "Cook Time: " + recipeDisplaySupplier.get().getCookTime()));
+        widgets.add(new LabelWidget(startPoint.x + 41, startPoint.y + 28,  "Time: " + format.format(cookTime) + "s (" + recipeDisplaySupplier.get().getCookTime() + " t)"));
 
         return widgets;
 	}
