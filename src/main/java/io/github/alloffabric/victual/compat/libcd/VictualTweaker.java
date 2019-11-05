@@ -41,6 +41,7 @@ public class VictualTweaker {
 	 * Register a toaster recipe.
 	 * @param input The input item.
 	 * @param output The output of the recipe.
+	 * @param cookTime The cooking time of the recipe in ticks.
 	 */
 	public void addToaster(Object input, Object output, int cookTime) {
 		try {
