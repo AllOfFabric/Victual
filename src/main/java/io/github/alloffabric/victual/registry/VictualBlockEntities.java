@@ -1,7 +1,7 @@
 package io.github.alloffabric.victual.registry;
 
 import io.github.alloffabric.victual.Victual;
-import io.github.alloffabric.victual.block.ToasterBlockEntity;
+import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
 import io.github.alloffabric.victual.block.entity.CuttingBoardBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;

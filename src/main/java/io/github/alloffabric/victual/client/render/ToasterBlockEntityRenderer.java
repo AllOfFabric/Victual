@@ -2,7 +2,7 @@ package io.github.alloffabric.victual.client.render;
 
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.alloffabric.victual.block.ToasterBlockEntity;
+import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;

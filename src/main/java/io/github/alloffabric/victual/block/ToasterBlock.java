@@ -1,5 +1,6 @@
 package io.github.alloffabric.victual.block;
 
+import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;

@@ -1,6 +1,5 @@
-package io.github.alloffabric.victual.block;
+package io.github.alloffabric.victual.block.entity;
 
-import io.github.alloffabric.victual.Victual;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlockEntities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
@@ -32,7 +31,6 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 	@Override
 	public void tick() {
 		if (timeLeft > 0) {
-			Victual.LOGGER.info(timeLeft);
 			prevTimeLeft = timeLeft;
 			timeLeft -= 1;
 		} else if (recipeTime > 0) {
@@ -52,8 +50,6 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			if (!isEmpty(1) && world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).isPresent()) {
 				results.set(1, world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).orElse(null).craft());
 			}
-
-			Victual.LOGGER.info("Done cooking. Items should have appeared.");
 
 			stacks.clear();
 

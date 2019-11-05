@@ -1,6 +1,6 @@
 package io.github.alloffabric.victual;
 
-import io.github.alloffabric.victual.block.ToasterBlockEntity;
+import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
 import io.github.alloffabric.victual.block.entity.CuttingBoardBlockEntity;
 import io.github.alloffabric.victual.client.render.CuttingBoardBlockEntityRenderer;
 import io.github.alloffabric.victual.client.render.ToasterBlockEntityRenderer;
