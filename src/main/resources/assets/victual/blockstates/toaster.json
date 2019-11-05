@@ -1,0 +1,16 @@
+{
+  "multipart": [
+	{   "when": { "facing": "north" },
+		"apply": { "model": "victual:block/toaster" }
+	},
+	{   "when": { "facing": "east" },
+		"apply": { "model": "victual:block/toaster", "y": 90 }
+	},
+	{   "when": { "facing": "south" },
+		"apply": { "model": "victual:block/toaster", "y": 180 }
+	},
+	{   "when": { "facing": "west" },
+		"apply": { "model": "victual:block/toaster", "y": 270 }
+	}
+  ]
+}

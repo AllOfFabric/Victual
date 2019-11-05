@@ -1,10 +1,7 @@
 package io.github.alloffabric.victual.registry;
 
 import io.github.alloffabric.victual.Victual;
-import io.github.alloffabric.victual.block.CounterBlock;
-import io.github.alloffabric.victual.block.CuttingBoardBlock;
-import io.github.alloffabric.victual.block.OvenBlock;
-import io.github.alloffabric.victual.block.PanBlock;
+import io.github.alloffabric.victual.block.*;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -19,6 +16,7 @@ public class VictualBlocks {
 	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
 	public static final OvenBlock OVEN = register("oven", new OvenBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
 	public static final PanBlock PAN = register("pan", new PanBlock(FabricBlockSettings.copy(Blocks.ANVIL).build()));
+	public static final ToasterBlock TOASTER = register("toaster", new ToasterBlock(FabricBlockSettings.copy(Blocks.ANVIL).build()));
 	
 	private VictualBlocks() {
 		// NO-OP

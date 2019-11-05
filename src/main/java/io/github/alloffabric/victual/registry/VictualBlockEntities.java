@@ -1,6 +1,7 @@
 package io.github.alloffabric.victual.registry;
 
 import io.github.alloffabric.victual.Victual;
+import io.github.alloffabric.victual.block.ToasterBlockEntity;
 import io.github.alloffabric.victual.block.entity.CuttingBoardBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 
 public class VictualBlockEntities {
 	public static final BlockEntityType CUTTING_BOARD = register("cutting_board", CuttingBoardBlockEntity::new, VictualBlocks.CUTTING_BOARD);
+	public static final BlockEntityType TOASTER = register("toaster", ToasterBlockEntity::new, VictualBlocks.TOASTER);
 
 	private VictualBlockEntities() {
 		// NO-OP
