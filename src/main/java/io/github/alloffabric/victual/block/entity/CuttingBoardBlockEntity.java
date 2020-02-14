@@ -81,7 +81,7 @@ public class CuttingBoardBlockEntity extends BlockEntity implements BlockEntityC
 
 	public void sync() {
 		if (world instanceof ServerWorld) {
-			((ServerWorld)world).method_14178().markForUpdate(pos);
+			((ServerWorld)world).getChunkManager().markForUpdate(pos);
 		}
 	}
 

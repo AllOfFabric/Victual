@@ -12,8 +12,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.BasicInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -35,17 +36,12 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 	}
 
 	@Override
-	public boolean isOpaque(BlockState blockState_1) {
-		return false;
-	}
-
-	@Override
 	public VoxelShape getOutlineShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, EntityContext entityContext_1) {
 		return VoxelShapes.cuboid(0, 0, 0, 1, 1F / 16F , 1);
 	}
 
 	@Override
-	public boolean activate(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
+	public ActionResult onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		if (world.getBlockEntity(blockPos) instanceof CuttingBoardBlockEntity) {
 			ItemStack stack = playerEntity.getStackInHand(hand);
 			CuttingBoardBlockEntity blockEntity = (CuttingBoardBlockEntity) world.getBlockEntity(blockPos);
@@ -57,14 +53,14 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 			if (blockEntity.isEmpty() && !stack.isEmpty() && recipe.isPresent()) {
 				blockEntity.setStack(stack);
 				playerEntity.setStackInHand(hand, ItemStack.EMPTY);
-				return true;
+				return ActionResult.SUCCESS;
 			} else if (!blockEntity.isEmpty() && stack.isEmpty()) {
 				playerEntity.setStackInHand(hand, blockEntity.getStack());
 				blockEntity.removeStack();
-				return true;
+				return ActionResult.SUCCESS;
 			}
 		}
-		return false;
+		return ActionResult.PASS;
 	}
 
 	@Override
@@ -81,7 +77,7 @@ public class CuttingBoardBlock extends HorizontalFacingBlock implements BlockEnt
 	}
 
 	@Override
-	protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactoryBuilder) {
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateFactoryBuilder) {
 		stateFactoryBuilder.add(new Property[] { FACING });
 	}
 

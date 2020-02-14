@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,12 +26,7 @@ public class PanBlock extends HorizontalFacingBlock {
 	}
 
 	@Override
-	public boolean isOpaque(BlockState blockState_1) {
-		return true;
-	}
-
-	@Override
-	protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactoryBuilder) {
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateFactoryBuilder) {
 		stateFactoryBuilder.add(new Property[] { FACING });
 	}
 

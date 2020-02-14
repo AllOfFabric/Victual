@@ -14,8 +14,9 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +37,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 	}
 
 	@Override
-	public boolean activate(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
+	public ActionResult onUse(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		BlockEntity blockEntity = world.getBlockEntity(blockPos);
 		Direction direction = blockState.get(FACING);
 
@@ -53,27 +54,27 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && recipe.isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 0);
 					stack.decrement(1);
-					return true;
+					return ActionResult.SUCCESS;
 				} else if (stack.isEmpty() && !toasterBlockEntity.isEmpty(0)){
 					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(0));
 					toasterBlockEntity.removeStack(0);
-					return true;
+					return ActionResult.SUCCESS;
 				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && recipe.isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 1);
 					stack.decrement(1);
-					return true;
+					return ActionResult.SUCCESS;
 				} else if (stack.isEmpty() && !toasterBlockEntity.isEmpty(1)){
 					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(1));
 					toasterBlockEntity.removeStack(1);
-					return true;
+					return ActionResult.SUCCESS;
 				}
 			} else if (playerEntity.isSneaking() && toasterBlockEntity.timeLeft <= 0 && !toasterBlockEntity.isEmpty(0) || playerEntity.isSneaking() && toasterBlockEntity.timeLeft <= 0 && !toasterBlockEntity.isEmpty(1)) {
 				toasterBlockEntity.activateToaster();
 				world.playSound(null, blockPos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1, 1);
-				return true;
+				return ActionResult.SUCCESS;
 			}
 		}
-		return false;
+		return ActionResult.PASS;
 	}
 
 	@Nullable
@@ -88,12 +89,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 	}
 
 	@Override
-	public boolean isOpaque(BlockState blockState_1) {
-		return true;
-	}
-
-	@Override
-	protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactoryBuilder) {
+	protected void appendProperties(StateManager.Builder<Block, BlockState> stateFactoryBuilder) {
 		stateFactoryBuilder.add(new Property[] { FACING });
 	}
 

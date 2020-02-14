@@ -20,6 +20,9 @@
 		],
 		"rei_plugins_v0": [
 			"io.github.alloffabric.victual.compat.rei.VictualREIPlugin"
+		],
+		"libcd": [
+			"io.github.alloffabric.victual.compat.libcd.VictualLibCDPlugin"
 		]
 	},
 	"mixins": [

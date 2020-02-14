@@ -1,8 +1,8 @@
 package io.github.alloffabric.victual.compat.rei;
 
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
+import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeDisplay;
-import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
@@ -13,13 +13,13 @@ import java.util.Optional;
 public class VictualToasterDisplay implements RecipeDisplay {
     private ToasterRecipe display;
 	private Ingredient input;
-    private List<ItemStack> output;
+    private List<EntryStack> output;
     private int cookTime;
 
     public VictualToasterDisplay(ToasterRecipe recipe) {
         this.display = recipe;
         this.input = recipe.getIngredient();
-        this.output = Collections.singletonList(recipe.getOutput());
+		this.output = Collections.singletonList(EntryStack.create(recipe.getOutput()));
         this.cookTime = recipe.getCookTime();
     }
 
@@ -34,16 +34,12 @@ public class VictualToasterDisplay implements RecipeDisplay {
     }
 
     @Override
-    public List<List<ItemStack>> getInput() {
-        return Collections.singletonList(Collections.singletonList(input.getStackArray()[0]));
+    public List<List<EntryStack>> getInputEntries() {
+        return Collections.singletonList(Collections.singletonList(EntryStack.create(input.getMatchingStacksClient()[0])));
     }
 
-    public Ingredient getIngredientInput() {
-    	return input;
-	}
-
     @Override
-    public List<ItemStack> getOutput() {
+    public List<EntryStack> getOutputEntries() {
         return this.output;
     }
 
@@ -52,7 +48,7 @@ public class VictualToasterDisplay implements RecipeDisplay {
 	}
 
 	@Override
-    public List<List<ItemStack>> getRequiredItems() {
-		return Collections.singletonList(Collections.singletonList(input.getStackArray()[0]));
+    public List<List<EntryStack>> getRequiredEntries() {
+		return Collections.singletonList(Collections.singletonList(EntryStack.create(input.getMatchingStacksClient()[0])));
     }
 }

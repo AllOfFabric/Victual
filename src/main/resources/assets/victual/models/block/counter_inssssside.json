@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "block/dark_oak_planks",
-		"2": "block/polished_diorite",
-		"particle": "block/dark_oak_planks"
+		"0": "victual:block/dark_oak_planks",
+		"2": "victual:block/polished_diorite",
+		"particle": "victual:block/dark_oak_planks"
 	},
 	"elements": [
 		{

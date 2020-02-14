@@ -23,6 +23,6 @@ public class VictualBlockEntities {
 	}
 	
 	private static <B extends BlockEntity> BlockEntityType<B> register(String name, Supplier<B> supplier, Block... supportedBlocks) {
-		return Registry.register(Registry.BLOCK_ENTITY, Victual.id(name), BlockEntityType.Builder.create(supplier, supportedBlocks).build(null));
+		return Registry.register(Registry.BLOCK_ENTITY_TYPE, Victual.id(name), BlockEntityType.Builder.create(supplier, supportedBlocks).build(null));
 	}
 }

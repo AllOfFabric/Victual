@@ -31,7 +31,7 @@ public class CuttingBoardRecipe implements Recipe<BasicInventory> {
 	}
 
 	private boolean hasRequiredIngredient(ItemStack potentialIngredient) {
-		return ingredient.method_8093(potentialIngredient);
+		return ingredient.test(potentialIngredient);
 	}
 
 	@Override

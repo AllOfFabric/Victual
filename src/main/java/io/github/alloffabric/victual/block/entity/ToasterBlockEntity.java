@@ -114,7 +114,7 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 
 	public void sync() {
 		if (world instanceof ServerWorld) {
-			((ServerWorld)world).method_14178().markForUpdate(pos);
+			((ServerWorld)world).getChunkManager().markForUpdate(pos);
 		}
 	}
 

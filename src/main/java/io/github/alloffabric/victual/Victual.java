@@ -1,10 +1,8 @@
 package io.github.alloffabric.victual;
 
-import io.github.alloffabric.victual.compat.libcd.VictualTweaker;
 import io.github.alloffabric.victual.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -31,8 +29,8 @@ public class Victual implements ModInitializer {
 		VictualEvents.init();
 		VictualRecipes.init();
 
-		if (FabricLoader.getInstance().isModLoaded("libcd")) {
-			VictualTweaker.init();
-		}
+//		if (FabricLoader.getInstance().isModLoaded("libcd")) {
+//			VictualTweaker.init();
+//		}
 	}
 }

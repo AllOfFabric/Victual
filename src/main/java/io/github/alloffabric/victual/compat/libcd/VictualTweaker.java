@@ -2,24 +2,14 @@ package io.github.alloffabric.victual.compat.libcd;
 
 import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
-import io.github.cottonmc.libcd.tweaker.RecipeParser;
-import io.github.cottonmc.libcd.tweaker.RecipeTweaker;
-import io.github.cottonmc.libcd.tweaker.Tweaker;
+import io.github.cottonmc.libcd.api.tweaker.recipe.RecipeParser;
+import io.github.cottonmc.libcd.api.tweaker.recipe.RecipeTweaker;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 public class VictualTweaker {
-	public static final VictualTweaker INSTANCE = new VictualTweaker();
 	private RecipeTweaker tweaker = RecipeTweaker.INSTANCE;
-
-	public VictualTweaker() {
-		// NO-OP
-	}
-
-	public static void init() {
-		Tweaker.addAssistant("VictualTweaker", INSTANCE);
-	}
 
 	/**
 	 * Register a cutting board recipe.

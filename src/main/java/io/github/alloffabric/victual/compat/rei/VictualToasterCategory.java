@@ -4,7 +4,6 @@ import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlocks;
 import me.shedaniel.math.api.Point;
 import me.shedaniel.math.api.Rectangle;
-import me.shedaniel.math.compat.RenderHelper;
 import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeCategory;
 import me.shedaniel.rei.gui.widget.EntryWidget;
@@ -13,13 +12,12 @@ import me.shedaniel.rei.gui.widget.RecipeBaseWidget;
 import me.shedaniel.rei.gui.widget.Widget;
 import me.shedaniel.rei.plugin.DefaultPlugin;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.util.Identifier;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -49,14 +47,11 @@ public class VictualToasterCategory implements RecipeCategory<VictualToasterDisp
 	@Override
 	public List<Widget> setupDisplay(Supplier<VictualToasterDisplay> recipeDisplaySupplier, Rectangle bounds) {
 		Point startPoint = new Point(bounds.getCenterX() - 41, bounds.getCenterY() - 17);
-		List<Widget> widgets = new LinkedList<>(Arrays.asList(new RecipeBaseWidget(bounds) {
-			@Override
+		List<Widget> widgets = new LinkedList(Collections.singletonList(new RecipeBaseWidget(bounds) {
 			public void render(int mouseX, int mouseY, float delta) {
 				super.render(mouseX, mouseY, delta);
-				RenderHelper.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-				GuiLighting.disable();
 				MinecraftClient.getInstance().getTextureManager().bindTexture(DefaultPlugin.getDisplayTexture());
-				blit(startPoint.x, startPoint.y, 0, 221, 82, 26);
+				this.blit(startPoint.x, startPoint.y, 0, 221, 82, 26);
 			}
 		}));
 

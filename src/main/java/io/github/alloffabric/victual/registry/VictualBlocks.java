@@ -12,11 +12,11 @@ import net.minecraft.util.registry.Registry;
 import java.util.function.Function;
 
 public class VictualBlocks {
-	public static final CounterBlock COUNTER = register("counter", new CounterBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
-	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
+	public static final CounterBlock COUNTER = register("counter", new CounterBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque().build()));
+	public static final CuttingBoardBlock CUTTING_BOARD = register("cutting_board", new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.STONE).nonOpaque().build()));
 	public static final OvenBlock OVEN = register("oven", new OvenBlock(FabricBlockSettings.copy(Blocks.STONE).build()));
-	public static final PanBlock PAN = register("pan", new PanBlock(FabricBlockSettings.copy(Blocks.ANVIL).build()));
-	public static final ToasterBlock TOASTER = register("toaster", new ToasterBlock(FabricBlockSettings.copy(Blocks.ANVIL).build()));
+	public static final PanBlock PAN = register("pan", new PanBlock(FabricBlockSettings.copy(Blocks.ANVIL).nonOpaque().build()));
+	public static final ToasterBlock TOASTER = register("toaster", new ToasterBlock(FabricBlockSettings.copy(Blocks.ANVIL).nonOpaque().build()));
 	
 	private VictualBlocks() {
 		// NO-OP

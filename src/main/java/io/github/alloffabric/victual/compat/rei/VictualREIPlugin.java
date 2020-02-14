@@ -4,11 +4,11 @@ import io.github.alloffabric.victual.Victual;
 import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlocks;
+import me.shedaniel.rei.api.EntryStack;
 import me.shedaniel.rei.api.RecipeHelper;
 import me.shedaniel.rei.api.plugins.REIPluginV0;
 import net.fabricmc.loader.api.SemanticVersion;
 import net.fabricmc.loader.util.version.VersionParsingException;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class VictualREIPlugin implements REIPluginV0 {
@@ -38,7 +38,7 @@ public class VictualREIPlugin implements REIPluginV0 {
 
 	@Override
 	public void registerOthers(RecipeHelper recipeHelper) {
-		recipeHelper.registerWorkingStations(CuttingBoardRecipe.Type.ID, new ItemStack(VictualBlocks.CUTTING_BOARD));
-		recipeHelper.registerWorkingStations(ToasterRecipe.Type.ID, new ItemStack(VictualBlocks.TOASTER));
+		recipeHelper.registerWorkingStations(CuttingBoardRecipe.Type.ID, EntryStack.create(VictualBlocks.CUTTING_BOARD));
+		recipeHelper.registerWorkingStations(ToasterRecipe.Type.ID, EntryStack.create(VictualBlocks.TOASTER));
 	}
 }
