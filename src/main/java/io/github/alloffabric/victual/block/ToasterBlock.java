@@ -1,7 +1,7 @@
 package io.github.alloffabric.victual.block;
 
 import io.github.alloffabric.victual.block.entity.ToasterBlockEntity;
-import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
+import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -12,8 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.BasicInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
@@ -49,7 +47,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 				BasicInventory inventory = new BasicInventory(1);
 				inventory.setInvStack(0, stack);
 
-				Optional<CuttingBoardRecipe> recipe = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world);
+				Optional<ToasterRecipe> recipe = world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, inventory, world);
 
 				if (!stack.isEmpty() && toasterBlockEntity.isEmpty(0) && recipe.isPresent()) {
 					toasterBlockEntity.setStack(new ItemStack(stack.getItem(), 1), 0);
@@ -70,7 +68,6 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 				}
 			} else if (playerEntity.isSneaking() && toasterBlockEntity.timeLeft <= 0 && !toasterBlockEntity.isEmpty(0) || playerEntity.isSneaking() && toasterBlockEntity.timeLeft <= 0 && !toasterBlockEntity.isEmpty(1)) {
 				toasterBlockEntity.activateToaster();
-				world.playSound(null, blockPos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1, 1);
 				return ActionResult.SUCCESS;
 			}
 		}

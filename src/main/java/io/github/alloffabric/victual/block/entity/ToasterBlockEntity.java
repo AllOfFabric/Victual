@@ -1,8 +1,8 @@
 package io.github.alloffabric.victual.block.entity;
 
-import io.github.alloffabric.victual.recipe.cuttingboard.CuttingBoardRecipe;
 import io.github.alloffabric.victual.recipe.toaster.ToasterRecipe;
 import io.github.alloffabric.victual.registry.VictualBlockEntities;
+import io.github.alloffabric.victual.registry.VictualSounds;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -11,6 +11,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.Tickable;
@@ -46,8 +47,8 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			stackOne.setInvStack(0, stacks.get(0));
 			stackTwo.setInvStack(0, stacks.get(1));
 
-			Optional<CuttingBoardRecipe> recipeOne = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, stackOne, world);
-			Optional<CuttingBoardRecipe> recipeTwo = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, stackTwo, world);
+			Optional<ToasterRecipe> recipeOne = world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world);
+			Optional<ToasterRecipe> recipeTwo = world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world);
 
 			if (!isEmpty(0) && recipeOne.isPresent()) {
 				results.set(0, recipeOne.orElse(null).craft(stackOne));
@@ -60,6 +61,7 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			stacks.clear();
 
 			if (!world.isClient()) {
+				world.playSound(null, getPos(), VictualSounds.TOASTER_STOP, SoundCategory.BLOCKS, 1, 1);
 				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.25, getPos().getZ(), results.get(0));
 				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.25, getPos().getZ(), results.get(1));
 			}
@@ -76,6 +78,10 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 			int stackOneTime = !isEmpty(0) ? world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackOne, world).orElse(null).getCookTime() : 0;
 			int stackTwoTime = !isEmpty(1) ? world.getRecipeManager().getFirstMatch(ToasterRecipe.Type.INSTANCE, stackTwo, world).orElse(null).getCookTime() : 0;
 			int totalTime = stackOneTime + stackTwoTime;
+
+			if (!world.isClient()) {
+				world.playSound(null, getPos(), VictualSounds.TOASTER_START, SoundCategory.BLOCKS, 1, 1);
+			}
 
 			if (totalTime > 0) {
 				recipeTime = totalTime;

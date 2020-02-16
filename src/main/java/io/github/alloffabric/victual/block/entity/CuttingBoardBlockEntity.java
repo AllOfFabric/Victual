@@ -43,7 +43,7 @@ public class CuttingBoardBlockEntity extends BlockEntity implements BlockEntityC
 			Optional<CuttingBoardRecipe> recipe = world.getRecipeManager().getFirstMatch(CuttingBoardRecipe.Type.INSTANCE, inventory, world);
 
 			if (!world.isClient() && !stack.isEmpty() && recipe.isPresent()) {
-				player.inventory.offerOrDrop(world, recipe.orElse(null).getOutput().copy());
+				player.inventory.offerOrDrop(world, recipe.orElse(null).craft(inventory));
 				decrStack();
 				world.playSound(null, getPos().getX(), getPos().getY(), getPos().getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return ActionResult.SUCCESS;

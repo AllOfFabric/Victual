@@ -55,18 +55,22 @@ public class ToasterBlockEntityRenderer extends BlockEntityRenderer<ToasterBlock
 			}
 
 			if (!secondStack.isEmpty()) {
+				matrices.push();
 				matrices.translate(0, 0, 4F / 16F);
 
 				renderItem(secondStack, matrices, vertexConsumers, light);
+				matrices.pop();
 			}
 		}
 	}
 
 	public void renderItem(ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+		matrices.push();
 		matrices.scale(0.5F, 0.5F, 0.5F);
 
 		matrices.translate(0, 0, -3.5F / 16F);
 
 		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers);
+		matrices.pop();
 	}
 }

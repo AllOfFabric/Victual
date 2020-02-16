@@ -1,0 +1,14 @@
+{
+	"block.toaster.start": {
+		"sounds": [
+			"victual:toaster/toaster_start"
+		],
+		"subtitle": "subtitle.victual.toaster.start"
+	},
+	"block.toaster.stop": {
+		"sounds": [
+			"victual:toaster/toaster_stop"
+		],
+		"subtitle": "subtitle.victual.toaster.stop"
+	}
+}

@@ -22,6 +22,7 @@ public class Victual implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		VictualConfig.sync(false);
+		VictualSounds.init();
 		VictualBlocks.init();
 		VictualItems.init();
 		VictualBlockEntities.init();

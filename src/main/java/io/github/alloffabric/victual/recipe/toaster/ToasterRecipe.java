@@ -38,7 +38,7 @@ public class ToasterRecipe implements Recipe<BasicInventory> {
 
 	@Override
 	public ItemStack craft(BasicInventory inventory) {
-		return ItemStack.EMPTY;
+		return getOutput().copy();
 	}
 
 	@Override
