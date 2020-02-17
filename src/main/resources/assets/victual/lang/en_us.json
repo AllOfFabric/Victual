@@ -8,6 +8,11 @@
 	"item.victual.bread_slice": "Bread Slice",
 	"item.victual.knife": "Cutting Knife",
 	"item.victual.toast": "Toast",
+	"item.victual.egg_yolk": "Raw Egg Yolk",
+	"item.victual.ham_slice": "Raw Ham Slice",
+	"item.victual.shrimp": "Raw Shrimp",
+	"item.victual.cooked_shrimp": "Cooked Shrimp",
+	"item.victual.cheese_slice": "Cheese Slice",
 	"rei.category.cutting_board_recipe": "Cutting Board",
 	"rei.category.toaster_recipe": "Toaster"
 }

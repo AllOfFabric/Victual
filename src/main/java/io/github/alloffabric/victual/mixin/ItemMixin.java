@@ -5,9 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 
@@ -20,8 +17,8 @@ public class ItemMixin {
 		//recipes.put(new Identifier("minecraft", "saddle"), FabricFoodComponent.copy(FoodComponents.APPLE).setHunger(4).setAlwaysEdible(true).build());
 	}
 
-	@Inject(method = "getFoodComponent", at = @At(value = "RETURN"), cancellable = true)
-	public void getFoodComponent(CallbackInfoReturnable<FoodComponent> callbackInfo) {
+//	@Inject(method = "getFoodComponent", at = @At(value = "RETURN"), cancellable = true)
+//	public void getFoodComponent(CallbackInfoReturnable<FoodComponent> callbackInfo) {
 //		Item item = (Item) ((Object) this);
 //		Identifier identifier = Registry.ITEM.getId(item);
 //		FoodComponent component = callbackInfo.getReturnValue();
@@ -31,15 +28,15 @@ public class ItemMixin {
 //		} else if (item.isFood() && component != null && identifier.getNamespace().equals("minecraft")) {
 //			callbackInfo.setReturnValue(FabricFoodComponent.copy(component).setHunger(component.getHunger() / 2).build());
 //		}
-	}
+//	}
 
-	@Inject(method = "isFood", at = @At(value = "RETURN"), cancellable = true)
-	public void isFood(CallbackInfoReturnable<Boolean> callbackInfo) {
+//	@Inject(method = "isFood", at = @At(value = "RETURN"), cancellable = true)
+//	public void isFood(CallbackInfoReturnable<Boolean> callbackInfo) {
 //		Item item = (Item) ((Object) this);
 //		Identifier identifier = Registry.ITEM.getId(item);
 //
 //		if (recipes.containsKey(identifier)) {
 //			callbackInfo.setReturnValue(recipes.get(identifier) != null);
 //		}
-	}
+//	}
 }

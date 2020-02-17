@@ -62,8 +62,8 @@ public class ToasterBlockEntity extends BlockEntity implements BlockEntityClient
 
 			if (!world.isClient()) {
 				world.playSound(null, getPos(), VictualSounds.TOASTER_STOP, SoundCategory.BLOCKS, 1, 1);
-				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.25, getPos().getZ(), results.get(0));
-				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.25, getPos().getZ(), results.get(1));
+				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.5, getPos().getZ(), results.get(0));
+				ItemScatterer.spawn(world, getPos().getX(), getPos().getY() + 0.5, getPos().getZ(), results.get(1));
 			}
 		}
 	}

@@ -11,7 +11,17 @@ public class VictualItems {
 
 	public static final Item BREAD_SLICE = register("bread_slice", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(1).build())));
 	public static final Item TOAST = register("toast", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(3).build())));
-	
+
+	public static final Item EGG_YOLK = register("egg_yolk", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(1).build())));
+
+	public static final Item HAM_SLICE = register("ham_slice", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(1).build())));
+
+	public static final Item SHRIMP = register("shrimp", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(2).build())));
+	public static final Item COOKED_SHRIMP = register("cooked_shrimp", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(5).build())));
+
+	public static final Item CHEESE_SLICE = register("cheese_slice", new Item(new Item.Settings().group(Victual.GROUP).food(FabricFoodComponent.of(1).build())));
+
+
 	private VictualItems() {
 		// NO-OP
 	}

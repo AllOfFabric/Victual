@@ -43,7 +43,7 @@ public class ToasterBlockEntityRenderer extends BlockEntityRenderer<ToasterBlock
 				float position = blockEntity.prevTimeLeft + (blockEntity.timeLeft - blockEntity.prevTimeLeft) * tickDelta;
 				float boundPosition = position / blockEntity.recipeTime;
 
-				matrices.translate(-(0.25F / 16F), -boundPosition / 4 + 0.25, 0);
+				matrices.translate(-(0.25F / 16F), -boundPosition / 4 + 0.30, 0);
 			} else {
 				matrices.translate(-(0.25F / 16F), 0.25, 0);
 			}

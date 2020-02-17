@@ -1,0 +1,10 @@
+{
+   "type": "victual:cutting_board_recipe",
+   "input": {
+     "item": "minecraft:porkchop"
+   },
+   "result": {
+     "item": "victual:ham_slice",
+     "count": 4
+   }
+}

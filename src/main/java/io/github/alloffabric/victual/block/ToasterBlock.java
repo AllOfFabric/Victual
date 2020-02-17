@@ -16,6 +16,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -54,7 +55,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 					stack.decrement(1);
 					return ActionResult.SUCCESS;
 				} else if (stack.isEmpty() && !toasterBlockEntity.isEmpty(0)){
-					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(0));
+					playerEntity.inventory.offerOrDrop(world, toasterBlockEntity.getStack(0));
 					toasterBlockEntity.removeStack(0);
 					return ActionResult.SUCCESS;
 				} else if (!stack.isEmpty() && toasterBlockEntity.isEmpty(1) && recipe.isPresent()) {
@@ -62,7 +63,7 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 					stack.decrement(1);
 					return ActionResult.SUCCESS;
 				} else if (stack.isEmpty() && !toasterBlockEntity.isEmpty(1)){
-					playerEntity.setStackInHand(hand, toasterBlockEntity.getStack(1));
+					playerEntity.inventory.offerOrDrop(world, toasterBlockEntity.getStack(1));
 					toasterBlockEntity.removeStack(1);
 					return ActionResult.SUCCESS;
 				}
@@ -93,5 +94,18 @@ public class ToasterBlock extends HorizontalFacingBlock implements BlockEntityPr
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext itemPlacementContext) {
 		return this.getDefaultState().with(FACING, itemPlacementContext.getPlayer().isSneaking() ? itemPlacementContext.getPlayerFacing().getOpposite() : itemPlacementContext.getPlayerFacing());
+	}
+
+	@Override
+	public void onBlockRemoved(BlockState blockState, World world, BlockPos blockPos, BlockState blockState2, boolean boolean_1) {
+		if (blockState.getBlock() != blockState2.getBlock()) {
+			BlockEntity blockEntity = world.getBlockEntity(blockPos);
+			if (blockEntity instanceof ToasterBlockEntity) {
+				ItemScatterer.spawn(world, blockPos, ((ToasterBlockEntity) blockEntity).stacks);
+				world.updateHorizontalAdjacent(blockPos, this);
+			}
+
+			super.onBlockRemoved(blockState, world, blockPos, blockState2, boolean_1);
+		}
 	}
 }
